@@ -25,8 +25,10 @@ public class Controller {
         model.commit();
     }
     public void post(){
-        String message=view.mensaje.getText();      
-        ServiceProxy.instance().post(message);
+        String message=view.mensaje.getText();  
+        String idEmisor = this.model.currentUser.getId();
+        String idReceptor = "jperez";
+        ServiceProxy.instance().post(message, idEmisor, idReceptor);
         model.commit();
     }
     

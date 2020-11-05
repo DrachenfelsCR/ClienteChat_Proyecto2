@@ -8,6 +8,7 @@ import java.io.ObjectOutputStream;
 import java.net.Socket;
 import javax.swing.SwingUtilities;
 import chatProtocol.IService;
+import chatProtocol.PaqueteDatos;
 
 public class ServiceProxy implements IService{
     private static IService theInstance;
@@ -71,10 +72,12 @@ public class ServiceProxy implements IService{
         this.disconnect();
     }
     
-    public void post(String message){
+    public void post(String message, String idEmisor, String idReceptor){
         try {
+                PaqueteDatos paqueteEnvio = new PaqueteDatos(message, idEmisor, idReceptor);
             out.writeInt(Protocol.POST);
-            out.writeObject(message);
+            //out.writeObject(message);
+            out.writeObject(paqueteEnvio);
             out.flush();            
         } 
         catch (IOException ex) {}   
