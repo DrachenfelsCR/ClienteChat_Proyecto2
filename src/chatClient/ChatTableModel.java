@@ -21,11 +21,11 @@ import javax.swing.table.TableModel;
  */
 public class ChatTableModel extends AbstractTableModel implements TableModel {
 
-   List<User> rows;
+   List<String> rows;
    String[] cols={"",""};
    Color[] paleta = {new Color(204,0,204),new Color(255,153,51),new Color(0,0,255),new Color(255,153,255)};
    int n = paleta.length;
-    public ChatTableModel(List<User> rows) {
+    public ChatTableModel(List<String> rows) {
         this.rows = rows;
     }
    
@@ -48,7 +48,7 @@ public class ChatTableModel extends AbstractTableModel implements TableModel {
 
     @Override
     public Object getValueAt(int row, int col) {
-        User u = rows.get(row);
+        String u = rows.get(row);
         switch(col){
             case 0: return this.icon(u,row);  
             default: return "";
@@ -58,15 +58,15 @@ public class ChatTableModel extends AbstractTableModel implements TableModel {
         }
     }
     
-   private Icon icon(User u, int i){
+   private Icon icon(String u, int i){
        BufferedImage img = new BufferedImage(200,40,BufferedImage.TYPE_INT_ARGB);
        Graphics2D g = img.createGraphics();
        g.setColor(paleta[i%2]);
-       g.fillOval(10, 0, 40, 40);
+       g.fillOval(10, 5, 40, 40);
        g.setColor(Color.white);
-       g.drawString(u.getId().substring(0,1).toUpperCase(),25,25);
+       g.drawString(u.substring(0,1).toUpperCase(),25,25);
        g.setColor(Color.black);
-       g.drawString(u.getId(),60,25);
+       g.drawString(u,60,25);
        return new ImageIcon(img);
    }
     

@@ -26,6 +26,7 @@ public class Data {
     public Data() {
         contactos = new ArrayList<>();     
         contactos.add("jperez");
+        contactos.add("teemorex");
     }
 
     public List<String> getContactos() {
