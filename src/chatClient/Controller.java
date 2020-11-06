@@ -22,6 +22,7 @@ public class Controller {
         User u = new User(view.id.getText(),new String(view.clave.getPassword()),"");
         User logged=ServiceProxy.instance().login(u);
         model.setCurrentUser(logged);
+        Service.instance().data.id = logged.getId();
         model.commit();
     }
     public void post(){

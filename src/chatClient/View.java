@@ -184,7 +184,8 @@ public class View extends javax.swing.JFrame implements java.util.Observer {
     }//GEN-LAST:event_loginActionPerformed
 
     private void logoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutActionPerformed
-        controller.logout();
+        Service.instance().store();
+        controller.logout();      
     }//GEN-LAST:event_logoutActionPerformed
 
     private void finishActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_finishActionPerformed

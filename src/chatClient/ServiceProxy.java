@@ -18,13 +18,13 @@ public class ServiceProxy implements IService{
         }
         return theInstance;
     }
-    
     Socket skt;    
     ObjectInputStream in;
     ObjectOutputStream out;
     Controller controller;
 
-    public ServiceProxy() {           
+    public ServiceProxy() {       
+     
     }
 
     public void setController(Controller controller) {
