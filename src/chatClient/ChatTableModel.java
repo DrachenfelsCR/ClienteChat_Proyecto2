@@ -22,7 +22,7 @@ import javax.swing.table.TableModel;
 public class ChatTableModel extends AbstractTableModel implements TableModel {
 
    List<String> rows;
-   String[] cols={"",""};
+   String[] cols={"Contactos",""};
    Color[] paleta = {new Color(204,0,204),new Color(255,153,51),new Color(0,0,255),new Color(255,153,255)};
    int n = paleta.length;
     public ChatTableModel(List<String> rows) {
@@ -62,7 +62,7 @@ public class ChatTableModel extends AbstractTableModel implements TableModel {
        BufferedImage img = new BufferedImage(200,40,BufferedImage.TYPE_INT_ARGB);
        Graphics2D g = img.createGraphics();
        g.setColor(paleta[i%2]);
-       g.fillOval(10, 5, 40, 40);
+       g.fillOval(10, 0, 40, 40);
        g.setColor(Color.white);
        g.drawString(u.substring(0,1).toUpperCase(),25,25);
        g.setColor(Color.black);
