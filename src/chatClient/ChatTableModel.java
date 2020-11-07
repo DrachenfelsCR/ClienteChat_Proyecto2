@@ -22,7 +22,7 @@ import javax.swing.table.TableModel;
 public class ChatTableModel extends AbstractTableModel implements TableModel {
 
    List<String> rows;
-   String[] cols={"Contactos",""};
+   String[] cols={"Contacto","Nombre"};
    Color[] paleta = {new Color(204,0,204),new Color(255,153,51),new Color(0,0,255),new Color(255,153,255)};
    int n = paleta.length;
     public ChatTableModel(List<String> rows) {
@@ -33,10 +33,13 @@ public class ChatTableModel extends AbstractTableModel implements TableModel {
     public int getRowCount() {
        return rows.size();
     }
+     public String getColumnName(int col){
+        return cols[col];
+    }
 
     @Override
     public int getColumnCount() {
-        return 1;
+        return 2;
     }
    @Override
     public Class<?> getColumnClass(int col){
@@ -51,8 +54,8 @@ public class ChatTableModel extends AbstractTableModel implements TableModel {
         String u = rows.get(row);
         switch(col){
             case 0: return this.icon(u,row);  
+            case 1: return u;
             default: return "";
-                
             
             
         }
@@ -62,11 +65,11 @@ public class ChatTableModel extends AbstractTableModel implements TableModel {
        BufferedImage img = new BufferedImage(200,40,BufferedImage.TYPE_INT_ARGB);
        Graphics2D g = img.createGraphics();
        g.setColor(paleta[i%2]);
-       g.fillOval(10, 0, 40, 40);
+       g.fillOval(65, 0, 40, 40);
        g.setColor(Color.white);
-       g.drawString(u.substring(0,1).toUpperCase(),25,25);
+       g.drawString(u.substring(0,1).toUpperCase(),82,25);
        g.setColor(Color.black);
-       g.drawString(u,60,25);
+
        return new ImageIcon(img);
    }
     

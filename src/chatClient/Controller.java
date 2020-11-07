@@ -28,7 +28,7 @@ public class Controller {
     public void post(){
         String message=view.mensaje.getText();  
         String idEmisor = this.model.currentUser.getId();
-        String idReceptor = "jperez";
+        String idReceptor = this.model.currentContact.getIdReceptor();
         ServiceProxy.instance().post(message, idEmisor, idReceptor);
         model.commit();
     }

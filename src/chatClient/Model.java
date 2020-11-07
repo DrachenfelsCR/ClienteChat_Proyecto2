@@ -1,5 +1,6 @@
 package chatClient;
 
+import chatProtocol.PaqueteDatos;
 import chatProtocol.User;
 import java.util.ArrayList;
 import java.util.List;
@@ -7,6 +8,9 @@ import java.util.List;
 public class Model extends java.util.Observable {
     User currentUser;
     List<String> messages;
+    PaqueteDatos currentContact;
+
+    
 
     public Model() {
        currentUser = null;
@@ -38,4 +42,11 @@ public class Model extends java.util.Observable {
         this.setChanged();
         this.notifyObservers();        
     } 
+    public void setCurrentContact(PaqueteDatos currentContact) {
+        this.currentContact = currentContact;
+    }
+
+    public PaqueteDatos getCurrentContact() {
+        return currentContact;
+    }
 }
