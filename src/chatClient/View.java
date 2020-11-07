@@ -1,6 +1,8 @@
 package chatClient;
 
 import java.awt.Color;
+import javax.swing.Icon;
+
 
 public class View extends javax.swing.JFrame implements java.util.Observer {
 
@@ -10,6 +12,7 @@ public class View extends javax.swing.JFrame implements java.util.Observer {
     public View() {
         initComponents();
         getRootPane().setDefaultButton(post);
+        
     }
 
     /**
@@ -29,6 +32,7 @@ public class View extends javax.swing.JFrame implements java.util.Observer {
         logout = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         Contactos = new javax.swing.JTable();
+        CurrentContact = new javax.swing.JLabel();
         loginPanel = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         id = new javax.swing.JTextField();
@@ -69,42 +73,52 @@ public class View extends javax.swing.JFrame implements java.util.Observer {
         ));
         Contactos.setAlignmentX(10.0F);
         Contactos.setRowHeight(60);
+        Contactos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                ContactosMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(Contactos);
+
+        CurrentContact.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
 
         javax.swing.GroupLayout bodyPanelLayout = new javax.swing.GroupLayout(bodyPanel);
         bodyPanel.setLayout(bodyPanelLayout);
         bodyPanelLayout.setHorizontalGroup(
             bodyPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(bodyPanelLayout.createSequentialGroup()
+                .addContainerGap(511, Short.MAX_VALUE)
+                .addComponent(mensaje, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(41, 41, 41)
+                .addComponent(post)
+                .addGap(41, 41, 41))
+            .addGroup(bodyPanelLayout.createSequentialGroup()
                 .addGap(32, 32, 32)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 85, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(bodyPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, bodyPanelLayout.createSequentialGroup()
-                        .addComponent(logout)
-                        .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, bodyPanelLayout.createSequentialGroup()
-                        .addComponent(mensaje, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(41, 41, 41)
-                        .addComponent(post)
-                        .addGap(41, 41, 41))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, bodyPanelLayout.createSequentialGroup()
-                        .addComponent(messages, javax.swing.GroupLayout.PREFERRED_SIZE, 442, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(24, 24, 24))))
+                    .addComponent(messages, javax.swing.GroupLayout.PREFERRED_SIZE, 442, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(bodyPanelLayout.createSequentialGroup()
+                        .addComponent(CurrentContact, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(276, 276, 276)
+                        .addComponent(logout)))
+                .addContainerGap())
         );
         bodyPanelLayout.setVerticalGroup(
             bodyPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(bodyPanelLayout.createSequentialGroup()
                 .addGroup(bodyPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(bodyPanelLayout.createSequentialGroup()
-                        .addGap(24, 24, 24)
-                        .addComponent(logout)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(messages, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(bodyPanelLayout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, bodyPanelLayout.createSequentialGroup()
+                        .addGap(5, 5, 5)
+                        .addGroup(bodyPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(logout)
+                            .addComponent(CurrentContact, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(messages, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18)
                 .addGroup(bodyPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(mensaje, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(post))
@@ -182,7 +196,7 @@ public class View extends javax.swing.JFrame implements java.util.Observer {
                 .addComponent(loginPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(20, 20, 20)
                 .addComponent(bodyPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(23, Short.MAX_VALUE))
         );
 
         pack();
@@ -213,6 +227,15 @@ public class View extends javax.swing.JFrame implements java.util.Observer {
     private void finishActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_finishActionPerformed
         System.exit(0);
     }//GEN-LAST:event_finishActionPerformed
+
+    private void ContactosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ContactosMouseClicked
+        // TODO add your handling code here:
+        int current;
+        current= Contactos.getSelectedRow();
+        Icon contacto = (Icon) Contactos.getValueAt(current,0);
+        CurrentContact.setIcon(contacto);
+        
+    }//GEN-LAST:event_ContactosMouseClicked
 
     /**
      * @param args the command line arguments
@@ -252,6 +275,7 @@ public class View extends javax.swing.JFrame implements java.util.Observer {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable Contactos;
+    private javax.swing.JLabel CurrentContact;
     private javax.swing.JPanel bodyPanel;
     public javax.swing.JPasswordField clave;
     private javax.swing.JButton finish;
@@ -269,6 +293,7 @@ public class View extends javax.swing.JFrame implements java.util.Observer {
     // End of variables declaration//GEN-END:variables
     Controller controller;
     Model model;
+    
     
     public void setController(Controller controller){
         this.controller=controller;
@@ -299,4 +324,5 @@ public class View extends javax.swing.JFrame implements java.util.Observer {
        }
         this.validate();
     } 
+   
 }
