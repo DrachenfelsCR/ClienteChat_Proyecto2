@@ -9,6 +9,7 @@ package chatClient;
  *
  * @author David
  */
+import chatProtocol.PaqueteDatos;
 import java.util.ArrayList;
 import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -22,13 +23,15 @@ public class Data {
     @XmlID 
     String id;
     private List<String> contactos;    
+    private List<PaqueteDatos> chats;
 
     public Data() {
         contactos = new ArrayList<>();     
         contactos.add("jperez");
         contactos.add("teemorex");
+        contactos.add("davidjqr");
     }
-
+    
     public List<String> getContactos() {
         return contactos;
     }
