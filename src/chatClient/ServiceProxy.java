@@ -74,7 +74,7 @@ public class ServiceProxy implements IService{
     
     public void post(String message, String idEmisor, String idReceptor){
         try {
-                PaqueteDatos paqueteEnvio = new PaqueteDatos(message, idEmisor, idReceptor);
+            PaqueteDatos paqueteEnvio = new PaqueteDatos(message, idEmisor, idReceptor);
             out.writeInt(Protocol.POST);
             //out.writeObject(message);
             out.writeObject(paqueteEnvio);

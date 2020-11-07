@@ -13,7 +13,6 @@ public class View extends javax.swing.JFrame implements java.util.Observer {
     public View() {
         initComponents();
         getRootPane().setDefaultButton(post);
-        
     }
 
     /**
@@ -34,6 +33,7 @@ public class View extends javax.swing.JFrame implements java.util.Observer {
         jScrollPane1 = new javax.swing.JScrollPane();
         Contactos = new javax.swing.JTable();
         CurrentContact = new javax.swing.JLabel();
+        jLabel_estatusConexion = new javax.swing.JLabel();
         loginPanel = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         id = new javax.swing.JTextField();
@@ -81,6 +81,9 @@ public class View extends javax.swing.JFrame implements java.util.Observer {
 
         CurrentContact.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
 
+        jLabel_estatusConexion.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLabel_estatusConexion.setText(".");
+
         javax.swing.GroupLayout bodyPanelLayout = new javax.swing.GroupLayout(bodyPanel);
         bodyPanel.setLayout(bodyPanelLayout);
         bodyPanelLayout.setHorizontalGroup(
@@ -88,7 +91,7 @@ public class View extends javax.swing.JFrame implements java.util.Observer {
             .addGroup(bodyPanelLayout.createSequentialGroup()
                 .addGap(32, 32, 32)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 324, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 56, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 85, Short.MAX_VALUE)
                 .addGroup(bodyPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, bodyPanelLayout.createSequentialGroup()
                         .addComponent(mensaje, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -99,8 +102,10 @@ public class View extends javax.swing.JFrame implements java.util.Observer {
                         .addGroup(bodyPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(messages, javax.swing.GroupLayout.PREFERRED_SIZE, 442, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(bodyPanelLayout.createSequentialGroup()
-                                .addComponent(CurrentContact, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(276, 276, 276)
+                                .addComponent(CurrentContact, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(28, 28, 28)
+                                .addComponent(jLabel_estatusConexion)
+                                .addGap(139, 139, 139)
                                 .addComponent(logout)))
                         .addContainerGap())))
         );
@@ -111,10 +116,15 @@ public class View extends javax.swing.JFrame implements java.util.Observer {
                 .addGroup(bodyPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 319, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(bodyPanelLayout.createSequentialGroup()
-                        .addGroup(bodyPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(logout)
-                            .addComponent(CurrentContact, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(bodyPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(bodyPanelLayout.createSequentialGroup()
+                                .addGroup(bodyPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(logout)
+                                    .addComponent(CurrentContact, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
+                            .addGroup(bodyPanelLayout.createSequentialGroup()
+                                .addComponent(jLabel_estatusConexion)
+                                .addGap(22, 22, 22)))
                         .addComponent(messages, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addGroup(bodyPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -158,7 +168,7 @@ public class View extends javax.swing.JFrame implements java.util.Observer {
                 .addComponent(clave, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(login)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 368, Short.MAX_VALUE)
                 .addComponent(finish)
                 .addGap(138, 138, 138))
         );
@@ -183,18 +193,16 @@ public class View extends javax.swing.JFrame implements java.util.Observer {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(loginPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(bodyPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(bodyPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addComponent(loginPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(20, 20, 20)
+                .addGap(18, 18, 18)
                 .addComponent(bodyPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(17, Short.MAX_VALUE))
+                .addContainerGap(19, Short.MAX_VALUE))
         );
 
         pack();
@@ -290,6 +298,7 @@ public class View extends javax.swing.JFrame implements java.util.Observer {
     public javax.swing.JTextField id;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel_estatusConexion;
     private javax.swing.JScrollPane jScrollPane1;
     public javax.swing.JButton login;
     private javax.swing.JPanel loginPanel;
@@ -324,11 +333,22 @@ public class View extends javax.swing.JFrame implements java.util.Observer {
             this.setTitle(model.getCurrentUser().getId());
             String msg="";
             for( String m: model.getMessages()){
+                if (m.equals("Offline")) {
+                    msg = "Offline";
+                    this.jLabel_estatusConexion.setText("Usuario Offline, mensaje no enviado");
+                    break;
+                }
                 msg+=(m +"\n");
             }
+            if (msg.equals("Offline")) {
+               
+           }
+            else
+            {
             this.messages.setText(msg);
             this.mensaje.setText("");
             this.mensaje.requestFocus();
+            }
        }
         this.validate();
     } 
