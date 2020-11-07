@@ -4,7 +4,9 @@
  * and open the template in the editor.
  */
 package chatClient;
-
+import java.lang.Exception;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 /**
  *
  * @author David
@@ -23,7 +25,9 @@ public class Service {
 
     public Service() {
         try{
-            data=XmlPersister.instance().load();
+            if (data == null) {
+                throw new Exception();
+            }
         }
         catch(Exception e){
             data =  new Data();
@@ -33,6 +37,14 @@ public class Service {
         try{  XmlPersister.instance().store(data, data.id); }
         catch(Exception e){ 
             System.out.println("error");
+        }
+      }
+    public void load(String id)
+    {
+        try {
+            data = XmlPersister.instance().load(id);
+        } catch (Exception ex) {
+            System.out.print("Este usuario no tiene contactos");
         }
     }
 }

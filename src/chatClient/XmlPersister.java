@@ -30,9 +30,9 @@ public class XmlPersister {
             path=p;         
     }  
     
-    public Data load() throws Exception{
+    public Data load(String ee) throws Exception{
         JAXBContext jaxbContext = JAXBContext.newInstance(Data.class);  
-        FileInputStream is = new FileInputStream(path);
+        FileInputStream is = new FileInputStream(ee + ".xml");
         Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();  
         Data result = (Data) unmarshaller.unmarshal(is);
         is.close();
@@ -48,4 +48,14 @@ public class XmlPersister {
         os.flush();
         os.close();     
     }
+    public String getPath() {
+        return path;
+    }
+
+    public void setPath(String path) {
+        this.path = path;
+    }
 }
+
+
+

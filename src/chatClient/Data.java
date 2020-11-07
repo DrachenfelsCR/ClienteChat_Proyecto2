@@ -26,10 +26,7 @@ public class Data {
     private List<PaqueteDatos> chats;
 
     public Data() {
-        contactos = new ArrayList<>();     
-        contactos.add("jperez");
-        contactos.add("teemorex");
-        contactos.add("davidjqr");
+        contactos = new ArrayList<>();   
     }
     
     public List<String> getContactos() {

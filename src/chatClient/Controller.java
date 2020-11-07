@@ -23,6 +23,7 @@ public class Controller {
         User logged=ServiceProxy.instance().login(u);
         model.setCurrentUser(logged);
         Service.instance().data.id = logged.getId();
+        Service.instance().load(logged.getId());
         model.commit();
     }
     public void post(){
@@ -36,6 +37,7 @@ public class Controller {
     public void logout(){
         try {
             ServiceProxy.instance().logout(model.getCurrentUser());
+            Service.instance().data.getContactos().clear();
         }
         catch (Exception ex) {}
         model.setCurrentUser(null);
