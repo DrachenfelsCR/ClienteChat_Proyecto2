@@ -48,7 +48,10 @@ public class Service {
         return dataC.getConversaciones();
     }
     public void AgregarContacto(String id){
-        data.agregarContacto(id);
+        if (busca(id)== null) {
+            data.agregarContacto(id);
+        }
+        
     }
        public void store(){
         try{  XmlPersister.instance().store(data, data.id); }
@@ -84,5 +87,9 @@ public class Service {
         List<String> result = new ArrayList<>();
         for(String c:data.getContactos()) {if (c.contains(o)) result.add(c);};
         return result;
+    }
+    public String busca(String o){
+        for(String c:data.getContactos()) {if (c.equals(o)) return o ;}
+        return null;
     }
 }
