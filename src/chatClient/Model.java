@@ -2,11 +2,16 @@ package chatClient;
 
 import chatProtocol.Chat;
 import chatProtocol.PaqueteDatos;
+import chatProtocol.Protocol;
 import chatProtocol.User;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.net.ServerSocket;
+import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Model extends java.util.Observable {
+public class Model extends java.util.Observable implements Runnable {
     User currentUser;
     List<Chat> messages;
     PaqueteDatos currentContact; 
@@ -60,6 +65,34 @@ public class Model extends java.util.Observable {
 
     public void setContactos(List<String> contactos) {
         this.contactos = contactos;
+    }
+
+    @Override
+    public void run() {
+        try {
+            ServerSocket serverCliente = new ServerSocket();
+            Socket Cliente;
+            PaqueteDatos paqueteRec;
+            while(true)
+            {
+            Cliente=serverCliente.accept();
+            ObjectInputStream flujoE = new ObjectInputStream(Cliente.getInputStream());
+                try {
+                    paqueteRec = (PaqueteDatos) flujoE.readObject();
+                    for(Chat c: this.messages)
+                    {
+                        if (c.getIdEmisor().equals(paqueteRec.getIdEmisor()) && c.getIdReceptor().equals(paqueteRec.getIdReceptor())) {
+                            c.getMensajes().add(paqueteRec.getMensaje());
+                            break;
+                        }
+                    }
+                } catch (ClassNotFoundException ex) {
+                    System.out.println(ex.getMessage());
+                }
+            }
+        } catch (IOException ex) {
+             System.out.println(ex.getMessage());
+        }
     }
     
     

@@ -50,8 +50,12 @@ public class Controller {
     }
         
     public void deliver(PaqueteDatos message){
+        User currentUser = model.getCurrentUser();
         for (Chat c: model.getMessages()) {
             if (c.getIdReceptor().equals(message.getIdReceptor()) && c.getIdEmisor().equals(message.getIdEmisor())) {
+                c.getMensajes().add(message.getMensaje());
+            }
+            else if (c.getIdReceptor().equals(message.getIdEmisor()) && c.getIdEmisor().equals(message.getIdReceptor())) {
                 c.getMensajes().add(message.getMensaje());
             }
         }
