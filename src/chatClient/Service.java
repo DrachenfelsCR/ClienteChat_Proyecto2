@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package chatClient;
+import chatProtocol.Chat;
 import java.lang.Exception;
 import java.util.ArrayList;
 import java.util.List;
@@ -37,6 +38,9 @@ public class Service {
     }
     public List<String> getContactos(){
         return data.getContactos();
+    }
+    public List<Chat> getConversaciones(){
+        return data.getConversaciones();
     }
     public void AgregarContacto(String id){
         data.agregarContacto(id);

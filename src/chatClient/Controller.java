@@ -27,6 +27,7 @@ public class Controller {
         Service.instance().data.id = logged.getId();
         Service.instance().load(logged.getId());
         model.setContactos(chatClient.Service.instance().getContactos());
+        model.setMessages(Service.instance().getConversaciones());
         model.commit();
     }
     public void post(){
@@ -40,7 +41,7 @@ public class Controller {
     
     public void logout(){
         try {
-            ServiceProxy.instance().logout(model.getCurrentUser());
+            ServiceProxy.instance().logout(model.getCurrentUser());            
             Service.instance().data.getContactos().clear();
         }
         catch (Exception ex) {}

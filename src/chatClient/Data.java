@@ -9,6 +9,7 @@ package chatClient;
  *
  * @author David
  */
+import chatProtocol.Chat;
 import chatProtocol.PaqueteDatos;
 import java.util.ArrayList;
 import java.util.List;
@@ -23,10 +24,11 @@ public class Data {
     @XmlID 
     String id;
     private List<String> contactos;    
-    private List<PaqueteDatos> chats;
+    private List<Chat> conversaciones;
 
     public Data() {
-        contactos = new ArrayList<>();   
+        contactos = new ArrayList<>();
+        conversaciones = new ArrayList<>();
     }
     
     public List<String> getContactos() {
@@ -39,4 +41,13 @@ public class Data {
     public void agregarContacto(String id){
         contactos.add(id);
     }
+
+    public List<Chat> getConversaciones() {
+        return conversaciones;
+    }
+
+    public void setConversaciones(List<Chat> conversaciones) {
+        this.conversaciones = conversaciones;
+    }
+    
 }
