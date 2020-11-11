@@ -16,9 +16,11 @@ public class Controller {
         this.model = model;
         localService = (ServiceProxy)ServiceProxy.instance();
         localService.setController(this);
+        Service.instance().load("davidjqr");
         model.setContactos(chatClient.Service.instance().getContactos());
         view.setController(this);
         view.setModel(model);
+        
     }
 
     public void login() throws Exception{
