@@ -25,7 +25,9 @@ public class Controller {
         User logged=ServiceProxy.instance().login(u);
         model.setCurrentUser(logged);
         Service.instance().data.id = logged.getId();
+        Service.instance().dataC.id = logged.getId();
         Service.instance().load(logged.getId());
+        Service.instance().loadC(logged.getId());
         model.setContactos(chatClient.Service.instance().getContactos());
         model.setMessages(Service.instance().getConversaciones());
         model.commit();

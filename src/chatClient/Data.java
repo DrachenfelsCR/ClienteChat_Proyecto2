@@ -24,11 +24,11 @@ public class Data {
     @XmlID 
     String id;
     private List<String> contactos;    
-    private List<Chat> conversaciones;
+  //  private List<Chat> conversaciones;
 
     public Data() {
         contactos = new ArrayList<>();
-        conversaciones = new ArrayList<>();
+     //   conversaciones = new ArrayList<>();
     }
     
     public List<String> getContactos() {
@@ -42,12 +42,12 @@ public class Data {
         contactos.add(id);
     }
 
-    public List<Chat> getConversaciones() {
+    /*public List<Chat> getConversaciones() {
         return conversaciones;
     }
 
     public void setConversaciones(List<Chat> conversaciones) {
         this.conversaciones = conversaciones;
-    }
+    }*/
     
 }

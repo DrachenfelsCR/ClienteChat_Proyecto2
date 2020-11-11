@@ -290,8 +290,9 @@ public class View extends javax.swing.JFrame implements java.util.Observer {
     }//GEN-LAST:event_loginActionPerformed
 
     private void logoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutActionPerformed
-        Service.instance().data.setConversaciones(model.getMessages());
+        Service.instance().dataC.setConversaciones(model.getMessages());
         Service.instance().store();
+        Service.instance().storeC();
         controller.logout();      
     }//GEN-LAST:event_logoutActionPerformed
 

@@ -25,7 +25,8 @@ public class Service {
     }
     
     Data data;
-
+    DataChats dataC;
+    
     public Service() {
         try{
             if (data == null) {
@@ -34,13 +35,14 @@ public class Service {
         }
         catch(Exception e){
             data =  new Data();
+            dataC = new DataChats();
         }
     }
     public List<String> getContactos(){
         return data.getContactos();
     }
     public List<Chat> getConversaciones(){
-        return data.getConversaciones();
+        return dataC.getConversaciones();
     }
     public void AgregarContacto(String id){
         data.agregarContacto(id);
@@ -51,12 +53,28 @@ public class Service {
             System.out.println("error");
         }
       }
+       
+          public void storeC(){
+        try{  XmlPersister.instance().storeC(dataC, dataC.id); }
+        catch(Exception e){ 
+            System.out.println("error");
+        }
+      }
     public void load(String id)
     {
         try {
             data = XmlPersister.instance().load(id);
         } catch (Exception ex) {
             System.out.print("Este usuario no tiene contactos");
+        }
+    }
+    
+     public void loadC(String id)
+    {
+        try {
+            dataC = XmlPersister.instance().loadC(id);
+        } catch (Exception ex) {
+            System.out.print("Este usuario no tiene chats");
         }
     }
     public List<String> search(String o){

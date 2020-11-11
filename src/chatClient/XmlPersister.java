@@ -48,6 +48,25 @@ public class XmlPersister {
         os.flush();
         os.close();     
     }
+       
+       public void storeC(DataChats d, String p)throws Exception{
+        JAXBContext jaxbContext = JAXBContext.newInstance(DataChats.class);  
+        pathContact = p + "Chats.xml";
+        FileOutputStream os = new FileOutputStream(pathContact);
+        Marshaller marshaller = jaxbContext.createMarshaller();  
+        marshaller.marshal(d, os);
+        os.flush();
+        os.close();     
+    }
+         public DataChats loadC(String ee) throws Exception{
+        JAXBContext jaxbContext = JAXBContext.newInstance(DataChats.class);  
+        FileInputStream is = new FileInputStream(ee + "Chats.xml");
+        Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();  
+        DataChats result = (DataChats) unmarshaller.unmarshal(is);
+        is.close();
+        return result;        
+    }
+       
     public String getPath() {
         return path;
     }

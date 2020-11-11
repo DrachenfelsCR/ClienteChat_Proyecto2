@@ -21,11 +21,28 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
 public class DataChats {
-    //@XmlID 
+    @XmlID 
     String id;
     private List<Chat> conversaciones;
 
     public DataChats() {
         conversaciones = new ArrayList<>();
     }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public List<Chat> getConversaciones() {
+        return conversaciones;
+    }
+
+    public void setConversaciones(List<Chat> conversaciones) {
+        this.conversaciones = conversaciones;
+    }
+    
 }
