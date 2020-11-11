@@ -278,7 +278,7 @@ public class View extends javax.swing.JFrame implements java.util.Observer {
 
     private void loginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginActionPerformed
         id.setBackground(Color.white);
-        clave.setBackground(Color.white);
+        clave.setBackground(Color.white);       
         try {
             controller.login();
             id.setText("");
@@ -287,6 +287,7 @@ public class View extends javax.swing.JFrame implements java.util.Observer {
             id.setBackground(Color.orange);
             clave.setBackground(Color.orange);
         }
+         model.setMessages(Service.instance().getConversaciones());
     }//GEN-LAST:event_loginActionPerformed
 
     private void logoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutActionPerformed

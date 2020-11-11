@@ -32,6 +32,9 @@ public class Service {
             if (data == null) {
                 throw new Exception();
             }
+            else if (dataC == null) {
+                throw new Exception();
+            }
         }
         catch(Exception e){
             data =  new Data();
