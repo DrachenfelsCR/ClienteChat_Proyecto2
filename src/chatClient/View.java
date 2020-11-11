@@ -1,7 +1,9 @@
 package chatClient;
 
+import chatProtocol.Chat;
 import chatProtocol.PaqueteDatos;
 import java.awt.Color;
+import java.util.ArrayList;
 import javax.swing.Icon;
 
 
@@ -33,7 +35,8 @@ public class View extends javax.swing.JFrame implements java.util.Observer {
         jScrollPane1 = new javax.swing.JScrollPane();
         Contactos = new javax.swing.JTable();
         CurrentContact = new javax.swing.JLabel();
-        jLabel_estatusConexion = new javax.swing.JLabel();
+        jLabel_contactoClickeado = new javax.swing.JLabel();
+        jLabel_conexionEstado = new javax.swing.JLabel();
         loginPanel = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         id = new javax.swing.JTextField();
@@ -81,8 +84,10 @@ public class View extends javax.swing.JFrame implements java.util.Observer {
 
         CurrentContact.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
 
-        jLabel_estatusConexion.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jLabel_estatusConexion.setText(".");
+        jLabel_contactoClickeado.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLabel_contactoClickeado.setText(".");
+
+        jLabel_conexionEstado.setText("Conexion");
 
         javax.swing.GroupLayout bodyPanelLayout = new javax.swing.GroupLayout(bodyPanel);
         bodyPanel.setLayout(bodyPanelLayout);
@@ -99,13 +104,15 @@ public class View extends javax.swing.JFrame implements java.util.Observer {
                         .addComponent(post)
                         .addGap(41, 41, 41))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, bodyPanelLayout.createSequentialGroup()
-                        .addGroup(bodyPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(bodyPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(messages, javax.swing.GroupLayout.PREFERRED_SIZE, 442, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(bodyPanelLayout.createSequentialGroup()
                                 .addComponent(CurrentContact, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(28, 28, 28)
-                                .addComponent(jLabel_estatusConexion)
-                                .addGap(139, 139, 139)
+                                .addGap(29, 29, 29)
+                                .addComponent(jLabel_contactoClickeado, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel_conexionEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(logout)))
                         .addContainerGap())))
         );
@@ -117,14 +124,11 @@ public class View extends javax.swing.JFrame implements java.util.Observer {
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 319, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(bodyPanelLayout.createSequentialGroup()
                         .addGroup(bodyPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(bodyPanelLayout.createSequentialGroup()
-                                .addGroup(bodyPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(logout)
-                                    .addComponent(CurrentContact, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
-                            .addGroup(bodyPanelLayout.createSequentialGroup()
-                                .addComponent(jLabel_estatusConexion)
-                                .addGap(22, 22, 22)))
+                            .addComponent(logout)
+                            .addComponent(CurrentContact, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel_contactoClickeado, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel_conexionEstado, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(messages, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addGroup(bodyPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -244,11 +248,21 @@ public class View extends javax.swing.JFrame implements java.util.Observer {
         PaqueteDatos currentCon= new PaqueteDatos();
         currentCon.setIdReceptor(faker);
         model.setCurrentContact(currentCon);
-        
+         this.jLabel_contactoClickeado.setText(faker);
          String msg="";
-        for( String m: model.getMessages()){
-                msg+=(m +"\n");
+         Chat auxiliar = null;
+        for( Chat c: model.getMessages()){
+            if (c.getIdEmisor().equals(model.currentUser.getId()) && c.getIdReceptor().equals(faker)) {
+                for (String m: c.getMensajes()) {
+                     msg+=(m +"\n");
+                }
+                auxiliar = c;
+                break;               
+            }               
             }
+        if (auxiliar == null) {
+           model.getMessages().add(new Chat(new ArrayList<String>(),model.currentUser.getId(),faker));
+        }
             this.messages.setText(msg);
             currentCon.setMensaje(msg);
     }//GEN-LAST:event_ContactosMouseClicked
@@ -298,7 +312,8 @@ public class View extends javax.swing.JFrame implements java.util.Observer {
     public javax.swing.JTextField id;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel_estatusConexion;
+    private javax.swing.JLabel jLabel_conexionEstado;
+    private javax.swing.JLabel jLabel_contactoClickeado;
     private javax.swing.JScrollPane jScrollPane1;
     public javax.swing.JButton login;
     private javax.swing.JPanel loginPanel;
@@ -332,15 +347,28 @@ public class View extends javax.swing.JFrame implements java.util.Observer {
            bodyPanel.setVisible(true);           
             this.setTitle(model.getCurrentUser().getId());
             String msg="";
-            for( String m: model.getMessages()){
-                if (m.equals("Offline")) {
-                    msg = "Offline";
-                    this.jLabel_estatusConexion.setText("Usuario Offline, mensaje no enviado");
-                    break;
+            for( Chat c: model.getMessages()){
+                if (model.currentContact.getIdReceptor().equals(c.getIdReceptor()) && model.currentUser.getId().equals(c.getIdEmisor())) 
+                {
+                    for (String m: c.getMensajes()) {
+                          if (m.equals("Offline")) {
+                              msg = "Offline";   
+                              c.getMensajes().remove(msg);
+                            break;
+                            }
+                          else 
+                          {
+                          msg+=(m +"\n");
+                          }
+                        }
+                    }
+                if (msg.equals("Offline")) {
+                            break;
                 }
-                msg+=(m +"\n");
+                       
             }
             if (msg.equals("Offline")) {
+               this.jLabel_conexionEstado.setText(msg);
                
            }
             else

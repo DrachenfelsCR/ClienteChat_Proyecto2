@@ -1,5 +1,7 @@
 package chatClient;
 
+import chatProtocol.Chat;
+import chatProtocol.PaqueteDatos;
 import chatProtocol.User;
 import java.util.ArrayList;
 
@@ -30,7 +32,8 @@ public class Controller {
         String message=view.mensaje.getText();  
         String idEmisor = this.model.currentUser.getId();
         String idReceptor = this.model.currentContact.getIdReceptor();
-        ServiceProxy.instance().post(message, idEmisor, idReceptor);
+        PaqueteDatos paqueteEnvio = new PaqueteDatos(message,idEmisor,idReceptor);
+        ServiceProxy.instance().post(paqueteEnvio, idEmisor, idReceptor);
         model.commit();
     }
     
@@ -41,12 +44,16 @@ public class Controller {
         }
         catch (Exception ex) {}
         model.setCurrentUser(null);
-        model.setMessages(new ArrayList<String>());
+        model.setMessages(new ArrayList<Chat>());
         model.commit();
     }
         
-    public void deliver(String message){
-        model.getMessages().add(message);
+    public void deliver(PaqueteDatos message){
+        for (Chat c: model.getMessages()) {
+            if (c.getIdReceptor().equals(message.getIdReceptor()) && c.getIdEmisor().equals(message.getIdEmisor())) {
+                c.getMensajes().add(message.getMensaje());
+            }
+        }
         model.commit();    
     }    
 }

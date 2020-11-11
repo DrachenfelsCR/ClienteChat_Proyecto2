@@ -73,13 +73,15 @@
                           <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="1" attributes="0">
-                          <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
                               <Component id="messages" min="-2" pref="442" max="-2" attributes="0"/>
                               <Group type="102" attributes="0">
                                   <Component id="CurrentContact" min="-2" pref="105" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
-                                  <Component id="jLabel_estatusConexion" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="139" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
+                                  <Component id="jLabel_contactoClickeado" min="-2" pref="50" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="jLabel_conexionEstado" min="-2" pref="96" max="-2" attributes="0"/>
+                                  <EmptySpace max="32767" attributes="0"/>
                                   <Component id="logout" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
@@ -97,18 +99,12 @@
                       <Component id="jScrollPane1" alignment="1" min="-2" pref="319" max="-2" attributes="0"/>
                       <Group type="102" attributes="0">
                           <Group type="103" groupAlignment="1" attributes="0">
-                              <Group type="102" attributes="0">
-                                  <Group type="103" groupAlignment="1" attributes="0">
-                                      <Component id="logout" min="-2" max="-2" attributes="0"/>
-                                      <Component id="CurrentContact" alignment="1" min="-2" pref="50" max="-2" attributes="0"/>
-                                  </Group>
-                                  <EmptySpace max="-2" attributes="0"/>
-                              </Group>
-                              <Group type="102" alignment="1" attributes="0">
-                                  <Component id="jLabel_estatusConexion" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
-                              </Group>
+                              <Component id="logout" min="-2" max="-2" attributes="0"/>
+                              <Component id="CurrentContact" alignment="1" min="-2" pref="50" max="-2" attributes="0"/>
+                              <Component id="jLabel_contactoClickeado" alignment="0" min="-2" pref="38" max="-2" attributes="0"/>
+                              <Component id="jLabel_conexionEstado" alignment="0" min="-2" pref="37" max="-2" attributes="0"/>
                           </Group>
+                          <EmptySpace max="-2" attributes="0"/>
                           <Component id="messages" min="-2" pref="224" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
@@ -186,12 +182,17 @@
             </Property>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel_estatusConexion">
+        <Component class="javax.swing.JLabel" name="jLabel_contactoClickeado">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Arial" size="14" style="1"/>
             </Property>
             <Property name="text" type="java.lang.String" value="."/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLabel_conexionEstado">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Conexion"/>
           </Properties>
         </Component>
       </SubComponents>

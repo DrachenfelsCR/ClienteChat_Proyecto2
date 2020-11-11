@@ -72,9 +72,9 @@ public class ServiceProxy implements IService{
         this.disconnect();
     }
     
-    public void post(String message, String idEmisor, String idReceptor){
+    public void post(PaqueteDatos message, String idEmisor, String idReceptor){
         try {
-            PaqueteDatos paqueteEnvio = new PaqueteDatos(message, idEmisor, idReceptor);
+           PaqueteDatos paqueteEnvio = new PaqueteDatos(message.getMensaje(), idEmisor, idReceptor);         
             out.writeInt(Protocol.POST);
             //out.writeObject(message);
             out.writeObject(paqueteEnvio);
@@ -106,7 +106,7 @@ public class ServiceProxy implements IService{
                 switch(method){
                 case Protocol.DELIVER:
                     try {
-                        String message=(String)in.readObject();
+                        PaqueteDatos message=(PaqueteDatos)in.readObject();
                         deliver(message);
                     } 
                     catch (ClassNotFoundException ex) {}
@@ -119,7 +119,7 @@ public class ServiceProxy implements IService{
         }
     }
     
-   private void deliver( final String  message ){
+   private void deliver( final PaqueteDatos  message ){
       SwingUtilities.invokeLater(new Runnable(){
             public void run(){
                controller.deliver(message);
