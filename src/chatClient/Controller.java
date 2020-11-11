@@ -16,17 +16,17 @@ public class Controller {
         this.model = model;
         localService = (ServiceProxy)ServiceProxy.instance();
         localService.setController(this);
-        Service.instance().load("davidjqr");
-        model.setContactos(chatClient.Service.instance().getContactos());
         view.setController(this);
         view.setModel(model);
-        
     }
 
     public void login() throws Exception{
         User u = new User(view.id.getText(),new String(view.clave.getPassword()),"");
         User logged=ServiceProxy.instance().login(u);
         model.setCurrentUser(logged);
+        Service.instance().data.id = logged.getId();
+        Service.instance().load(logged.getId());
+        model.setContactos(chatClient.Service.instance().getContactos());
         model.commit();
     }
     public void post(){
