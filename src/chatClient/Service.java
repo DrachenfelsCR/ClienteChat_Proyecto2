@@ -5,6 +5,8 @@
  */
 package chatClient;
 import java.lang.Exception;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 /**
@@ -33,6 +35,12 @@ public class Service {
             data =  new Data();
         }
     }
+    public List<String> getContactos(){
+        return data.getContactos();
+    }
+    public void AgregarContacto(String id){
+        data.agregarContacto(id);
+    }
        public void store(){
         try{  XmlPersister.instance().store(data, data.id); }
         catch(Exception e){ 
@@ -46,5 +54,10 @@ public class Service {
         } catch (Exception ex) {
             System.out.print("Este usuario no tiene contactos");
         }
+    }
+    public List<String> search(String o){
+        List<String> result = new ArrayList<>();
+        for(String c:data.getContactos()) {if (c.contains(o)) result.add(c);};
+        return result;
     }
 }

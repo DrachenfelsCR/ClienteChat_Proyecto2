@@ -16,6 +16,7 @@ public class Controller {
         this.model = model;
         localService = (ServiceProxy)ServiceProxy.instance();
         localService.setController(this);
+        model.setContactos(chatClient.Service.instance().getContactos());
         view.setController(this);
         view.setModel(model);
     }
@@ -55,5 +56,16 @@ public class Controller {
             }
         }
         model.commit();    
-    }    
+    }
+    public void AgregarContacto(String id){
+       chatClient.Service.instance().AgregarContacto(id);
+       model.setContactos( chatClient.Service.instance().getContactos());
+       model.commit();
+       
+    }
+    public void buscar(String c){
+      model.setContactos(Service.instance().search(c));
+       model.commit();
+       
+   }
 }

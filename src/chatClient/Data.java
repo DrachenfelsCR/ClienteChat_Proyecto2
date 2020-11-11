@@ -36,5 +36,7 @@ public class Data {
     public void setContactos(List<String> contactos) {
         this.contactos = contactos;
     }
-    
+    public void agregarContacto(String id){
+        contactos.add(id);
+    }
 }

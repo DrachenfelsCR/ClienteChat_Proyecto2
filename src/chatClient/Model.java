@@ -9,13 +9,16 @@ import java.util.List;
 public class Model extends java.util.Observable {
     User currentUser;
     List<Chat> messages;
-    PaqueteDatos currentContact;
+    PaqueteDatos currentContact; 
+    List<String> contactos;
 
     
 
     public Model() {
-       currentUser = null;
+       currentContact=null;
+        currentUser = null;
        messages=new ArrayList<>();
+       contactos = new ArrayList<>();
     }
 
     public User getCurrentUser() {
@@ -50,4 +53,16 @@ public class Model extends java.util.Observable {
     public PaqueteDatos getCurrentContact() {
         return currentContact;
     }
+
+    public List<String> getContactos() {
+        return contactos;
+    }
+
+    public void setContactos(List<String> contactos) {
+        this.contactos = contactos;
+    }
+    
+    
+    
+    
 }
