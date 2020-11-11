@@ -60,7 +60,7 @@ public class XmlPersister {
     }
          public DataChats loadC(String ee) throws Exception{
         JAXBContext jaxbContext = JAXBContext.newInstance(DataChats.class);  
-        FileInputStream is = new FileInputStream(ee + "Chats.xml");
+        FileInputStream is = new FileInputStream(ee);
         Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();  
         DataChats result = (DataChats) unmarshaller.unmarshal(is);
         is.close();

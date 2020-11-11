@@ -18,6 +18,7 @@ public class Controller {
         localService.setController(this);
         view.setController(this);
         view.setModel(model);
+        
     }
 
     public void login() throws Exception{
@@ -27,7 +28,7 @@ public class Controller {
         Service.instance().data.id = logged.getId();
         Service.instance().dataC.id = logged.getId();
         Service.instance().load(logged.getId());
-        Service.instance().loadC(logged.getId());
+        Service.instance().loadC(logged.getId()+"Chats.xml");
         model.setContactos(chatClient.Service.instance().getContactos());
         model.setMessages(Service.instance().getConversaciones());
         model.commit();
