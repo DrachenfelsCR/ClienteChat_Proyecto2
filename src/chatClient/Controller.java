@@ -57,9 +57,15 @@ public class Controller {
         try{
         for (Chat c: model.getMessages()) {
             if (c.getIdReceptor().equals(message.getIdReceptor()) && c.getIdEmisor().equals(message.getIdEmisor())) {
+                if (c.getMensajes() == null) {
+                    c.getMensajes();
+                }
                 c.getMensajes().add(message.getMensaje());
             }
             else if (c.getIdReceptor().equals(message.getIdEmisor()) && c.getIdEmisor().equals(message.getIdReceptor())) {
+                if (c.getMensajes() == null) {
+                    c.getMensajes();
+                }
                 c.getMensajes().add(message.getMensaje());
             }
         }

@@ -361,7 +361,8 @@ public class View extends javax.swing.JFrame implements java.util.Observer {
             }               
             }
         if (auxiliar == null) {
-           model.getMessages().add(new Chat(new ArrayList<String>(),model.currentUser.getId(),faker));
+            Chat nuevoC = new Chat(new ArrayList<String>(),model.currentUser.getId(),faker);
+           model.getMessages().add(nuevoC);
         }        
         }
         catch(Exception e)
@@ -372,8 +373,9 @@ public class View extends javax.swing.JFrame implements java.util.Observer {
     }//GEN-LAST:event_AgregarContactoActionPerformed
 
     private void BuscarBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BuscarBotonActionPerformed
-        
+
         controller.buscar(TextoContacto.getText());
+        this.jLabel_conexionEstado.setText("");
         TextoContacto.setText("");
     }//GEN-LAST:event_BuscarBotonActionPerformed
 
@@ -500,15 +502,14 @@ public class View extends javax.swing.JFrame implements java.util.Observer {
             }
             catch(Exception e)
             {
-            System.out.println("Mensaje recibido");
-            this.jLabel_pendiente.setText("(!) Msj recibido");
+            this.jLabel_pendiente.setText("(!)");
             }
             if (msg.equals("Offline")) {
                this.jLabel_conexionEstado.setText(msg);
                
            }
             else if (msg.equals("NULLERROR_NOUSER")) {
-                this.jLabel_conexionEstado.setText("User no registrado");
+                this.jLabel_conexionEstado.setText("NO USER");
            }
             else
             {
@@ -518,10 +519,10 @@ public class View extends javax.swing.JFrame implements java.util.Observer {
                 else if(msg.equals("Offline"))
                 {
                 this.jLabel_conexionEstado.setText("Offline");
-                }         
+                }       
                 else
                 {
-                this.jLabel_conexionEstado.setText("Online");
+                 this.jLabel_conexionEstado.setText("Online");
                 }
             this.messages.setText(msg);
             this.mensaje.setText("");
