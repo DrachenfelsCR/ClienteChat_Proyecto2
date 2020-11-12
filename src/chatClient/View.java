@@ -272,7 +272,13 @@ public class View extends javax.swing.JFrame implements java.util.Observer {
 
     private void postActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_postActionPerformed
         try{
+            if (this.jLabel_contactoClickeado.getText().isEmpty()) {
+                
+            }
+            else
+            {
             controller.post();
+            }
         }
         catch(Exception ex){
             
@@ -458,9 +464,7 @@ public class View extends javax.swing.JFrame implements java.util.Observer {
      * @param parametros
      */
     @Override
-   public void update(java.util.Observable updatedModel,Object parametros){
-     
-       
+   public void update(java.util.Observable updatedModel,Object parametros){    
        if(model.getCurrentUser()==null){
            loginPanel.setVisible(true);
            bodyPanel.setVisible(false);
@@ -529,10 +533,11 @@ public class View extends javax.swing.JFrame implements java.util.Observer {
             this.mensaje.requestFocus();
             }
        }
-       
+         if (jLabel_contactoClickeado.getText().isEmpty()) {
+            this.messages.setText("");
+        }  
         this.validate();
         Contactos.setModel(new ChatTableModel(model.getContactos()));
         
-    } 
-   
+   }
 }
