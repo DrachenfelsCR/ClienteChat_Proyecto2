@@ -41,6 +41,7 @@ public class View extends javax.swing.JFrame implements java.util.Observer {
         BuscarBoton = new javax.swing.JButton();
         TextoAgregarContacto = new javax.swing.JTextField();
         AgregarContacto = new javax.swing.JButton();
+        jLabel_pendiente = new javax.swing.JLabel();
         loginPanel = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         id = new javax.swing.JTextField();
@@ -91,7 +92,6 @@ public class View extends javax.swing.JFrame implements java.util.Observer {
         CurrentContact.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
 
         jLabel_contactoClickeado.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jLabel_contactoClickeado.setText(".");
 
         jLabel_conexionEstado.setText("Conexion");
 
@@ -121,19 +121,21 @@ public class View extends javax.swing.JFrame implements java.util.Observer {
             bodyPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, bodyPanelLayout.createSequentialGroup()
                 .addGap(27, 27, 27)
-                .addGroup(bodyPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(bodyPanelLayout.createSequentialGroup()
-                        .addComponent(TextoAgregarContacto, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(AgregarContacto)
-                        .addGap(46, 46, 46))
-                    .addGroup(bodyPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(bodyPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(bodyPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addGroup(bodyPanelLayout.createSequentialGroup()
-                            .addComponent(TextoContacto, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(36, 36, 36)
-                            .addComponent(BuscarBoton, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 324, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(98, 98, 98)
+                            .addComponent(TextoAgregarContacto, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(AgregarContacto)
+                            .addGap(46, 46, 46))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 324, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(bodyPanelLayout.createSequentialGroup()
+                        .addComponent(TextoContacto, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(36, 36, 36)
+                        .addComponent(BuscarBoton, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel_pendiente, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(34, 34, 34)
                 .addGroup(bodyPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, bodyPanelLayout.createSequentialGroup()
                         .addComponent(mensaje, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -176,7 +178,8 @@ public class View extends javax.swing.JFrame implements java.util.Observer {
                     .addGroup(bodyPanelLayout.createSequentialGroup()
                         .addGroup(bodyPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(TextoContacto, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(BuscarBoton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(BuscarBoton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel_pendiente))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 319, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -313,6 +316,7 @@ public class View extends javax.swing.JFrame implements java.util.Observer {
         model.setCurrentContact(currentCon);
          this.jLabel_contactoClickeado.setText(faker);
          String msg="";
+         this.jLabel_pendiente.setText("");
          Chat auxiliar = null;
         for( Chat c: model.getMessages()){
             if (c.getIdEmisor().equals(model.currentUser.getId()) && c.getIdReceptor().equals(faker)) {
@@ -393,6 +397,7 @@ public class View extends javax.swing.JFrame implements java.util.Observer {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel_conexionEstado;
     private javax.swing.JLabel jLabel_contactoClickeado;
+    private javax.swing.JLabel jLabel_pendiente;
     private javax.swing.JScrollPane jScrollPane1;
     public javax.swing.JButton login;
     private javax.swing.JPanel loginPanel;
@@ -434,7 +439,9 @@ public class View extends javax.swing.JFrame implements java.util.Observer {
            bodyPanel.setVisible(true);           
             this.setTitle(model.getCurrentUser().getId());
             String msg="";
-            for( Chat c: model.getMessages()){
+            try
+            {    
+                for( Chat c: model.getMessages()){
                 if (model.currentContact.getIdReceptor().equals(c.getIdReceptor()) && model.currentUser.getId().equals(c.getIdEmisor())) 
                 {
                     for (String m: c.getMensajes()) {
@@ -453,6 +460,12 @@ public class View extends javax.swing.JFrame implements java.util.Observer {
                             break;
                 }
                        
+                }
+            }
+            catch(Exception e)
+            {
+            System.out.println("Mensaje recibido");
+            this.jLabel_pendiente.setText("(!) Msj recibido");
             }
             if (msg.equals("Offline")) {
                this.jLabel_conexionEstado.setText(msg);
@@ -460,6 +473,7 @@ public class View extends javax.swing.JFrame implements java.util.Observer {
            }
             else
             {
+            this.jLabel_conexionEstado.setText("Online");
             this.messages.setText(msg);
             this.mensaje.setText("");
             this.mensaje.requestFocus();
