@@ -317,9 +317,12 @@ public class View extends javax.swing.JFrame implements java.util.Observer {
          this.jLabel_contactoClickeado.setText(faker);
          String msg="";
          this.jLabel_pendiente.setText("");
+         this.jLabel_conexionEstado.setText("");
          Chat auxiliar = null;
+        try
+        {
         for( Chat c: model.getMessages()){
-            if (c.getIdEmisor().equals(model.currentUser.getId()) && c.getIdReceptor().equals(faker)) {
+            if (c.getIdEmisor().equals(model.currentUser.getId()) && this.model.currentContact.getIdReceptor().equals(c.getIdReceptor())) {
                 for (String m: c.getMensajes()) {
                      msg+=(m +"\n");
                 }
@@ -332,12 +335,40 @@ public class View extends javax.swing.JFrame implements java.util.Observer {
         }
             this.messages.setText(msg);
             currentCon.setMensaje(msg);
+        }
+        catch(Exception e)
+        {
+        this.messages.setText("");
+        }
     }//GEN-LAST:event_ContactosMouseClicked
 
     private void AgregarContactoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AgregarContactoActionPerformed
          if( TextoAgregarContacto.getText().isEmpty()) return;
          controller.AgregarContacto(TextoAgregarContacto.getText());
-          TextoAgregarContacto.setText("");
+          String faker = TextoAgregarContacto.getText();
+          TextoAgregarContacto.setText("");         
+        PaqueteDatos currentCon= new PaqueteDatos();
+        currentCon.setIdReceptor(faker);
+        model.setCurrentContact(currentCon);
+         String msg="";     
+         Chat auxiliar = null;
+        try
+        {
+        for( Chat c: model.getMessages()){
+            if (c.getIdEmisor().equals(model.currentUser.getId()) && this.model.currentContact.getIdReceptor().equals(c.getIdReceptor())) {                
+                auxiliar = c;
+                break;               
+            }               
+            }
+        if (auxiliar == null) {
+           model.getMessages().add(new Chat(new ArrayList<String>(),model.currentUser.getId(),faker));
+        }        
+        }
+        catch(Exception e)
+        {
+        //this.messages.setText("");
+        System.out.println("Algo paso :V");
+        }
     }//GEN-LAST:event_AgregarContactoActionPerformed
 
     private void BuscarBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BuscarBotonActionPerformed
@@ -449,7 +480,12 @@ public class View extends javax.swing.JFrame implements java.util.Observer {
                               msg = "Offline";   
                               c.getMensajes().remove(msg);
                             break;
-                            }
+                            }  
+                          if (m.equals("NULLERROR_NOUSER")) {
+                              msg = "NULLERROR_NOUSER";   
+                              c.getMensajes().remove(msg);
+                            break;
+                            }  
                           else 
                           {
                           msg+=(m +"\n");
@@ -471,9 +507,22 @@ public class View extends javax.swing.JFrame implements java.util.Observer {
                this.jLabel_conexionEstado.setText(msg);
                
            }
+            else if (msg.equals("NULLERROR_NOUSER")) {
+                this.jLabel_conexionEstado.setText("User no registrado");
+           }
             else
             {
-            this.jLabel_conexionEstado.setText("Online");
+                if (jLabel_contactoClickeado.getText().isEmpty()) {
+                    this.jLabel_conexionEstado.setText("");
+                }
+                else if(msg.equals("Offline"))
+                {
+                this.jLabel_conexionEstado.setText("Offline");
+                }         
+                else
+                {
+                this.jLabel_conexionEstado.setText("Online");
+                }
             this.messages.setText(msg);
             this.mensaje.setText("");
             this.mensaje.requestFocus();
